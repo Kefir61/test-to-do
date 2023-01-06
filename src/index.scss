@@ -49,6 +49,50 @@ h2 {
 a {
   text-decoration: none;
 }
+:root {
+  /* colors */
+  --color-text: #434141;
+  --color-placeholder: rgba(0, 0, 0, 0.5);
+  --color-additional: #93b1ff;
+  --color-additional7: rgba(147, 177, 255, 0.7);
+  --background-color-calendar: #ededed;
+  --background-color-calendar-header: #ffffff;
+
+  /* images */
+  --images-arrow: url('../src/assets/icons/arrow.svg');
+  /* spacing */
+  /* text */
+}
+
+:root {
+  /* colors */
+  --color-text: #434141;
+  --color-placeholder: rgba(0, 0, 0, 0.5);
+  --color-additional: rgba(53, 221, 84);
+  --color-additional7: rgb(55, 187, 79);
+  --background-color-calendar: #ededed;
+  --background-color-calendar-header: rgb(136, 202, 252);
+
+  /* images */
+  --images-arrow: url('../src/assets/icons/arrow_white.svg');
+  /* spacing */
+  /* text */
+}
+
+:root {
+  /* colors */
+  --color-text: #ffffff;
+  --color-placeholder: rgba(255, 255, 255, 0.5);
+  --color-additional: rgba(53, 221, 84);
+  --color-additional7: rgb(58, 199, 84);
+  --background-color-calendar: #3a3e42;
+  --background-color-calendar-header: #575c63;
+
+  /* images */
+  --images-arrow: url('../src/assets/icons/arrow.svg');
+  /* spacing */
+  /* text */
+}
 
 @mixin noselect {
   -webkit-touch-callout: none; /* iOS Safari */
@@ -249,5 +293,118 @@ a {
     &:hover{
       text-decoration: underline;
     }
+  }
+}
+
+
+//---------------------------------------CALENDAR--------------------------------------//
+
+.calendar{
+  width: 300px;
+  position:fixed;
+  top:20px;
+  right:20px;
+  border-radius: 5px;
+  background-color: var(--background-color-calendar);
+  &--header{
+    position: relative;
+    border-radius: 5px 5px 0 0;
+    padding: 10px;
+    background-color: var(--background-color-calendar-header);
+    color: var(--color-text);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 2px 10px -1px rgba(0, 0, 0, 0.2);
+    &__left{
+      width: 5px;
+      height: 10px;
+      cursor: pointer;
+      background-image: var(--images-arrow);
+    }
+    &__right{
+      width: 5px;
+      height: 10px;
+      cursor: pointer;
+      background-image: var(--images-arrow);
+      transform: rotate(-180deg);
+    }
+  }
+  &--body{
+    border-radius: 0 0 5px 5px;
+    padding: 5px;
+  }
+  &--week__names{
+    height: 20px;
+  font-weight: 600;
+  font-size: 8px;
+  text-align: center;
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px 1px;
+  color: var(--color-additional);
+  }
+  &--days{
+    font-size: 10px;
+  font-weight: 400;
+  color: var(--color-text);
+  text-align: center;
+  display: grid;
+  text-align: center;
+  align-items: center;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: 1fr;
+  gap: 1px 1px;
+  }
+  &--day{
+    border-radius: 5px;
+  padding: 5.5px 0px;
+  cursor: pointer;
+  &:hover{
+    background-color: var(--color-additional7);
+  }
+  }
+  &--additional__day{
+    padding: 5.5px;
+    font-weight: 300;
+    cursor: pointer;
+    color: var(--color-placeholder);
+  }
+  &--selected__item{
+    color: var(--color-text);
+    background-color: var(--color-additional);
+    &:hover {
+      background-color: var(--color-additional);
+    }
+  }
+  &----pick__item{
+    padding: 9px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 5px;
+    &:hover{
+      background-color: var(--color-additional7);
+    }
+  }
+  &--today__item{
+    background-color: var(--background-color-calendar-header);
+  }
+  &--items__container{
+    font-weight: 400;
+    color: var(--color-text);
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 1px 1px;
+    font-size: 12px;
+  }
+  &--unchoosable__year{
+    font-weight: 300;
+    padding: 9px 16px;
+    color: var(--color-placeholder);
   }
 }

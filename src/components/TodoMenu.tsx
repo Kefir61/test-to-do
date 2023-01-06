@@ -3,33 +3,47 @@ import CreateTodo from './CreateTodo'
 import SortTodo from './SortTodo';
 import TodoItem from './TodoItem'
 
+
+interface TodoMenuProps {
+     selectedDate: Date;
+}
+
 type TodoItem =
      {
+          id: string;
           title: string;
           isCompleted: boolean
      }
-const TodoMenu: React.FC = () => {
+
+
+const TodoMenu: React.FC<TodoMenuProps> = ({ selectedDate }) => {
+     const selectedId = `${selectedDate.getDate() + ' ' + selectedDate.getMonth() + ' ' + selectedDate.getFullYear()}`
      const [todoItems, setTodoItems] = useState<TodoItem[]>([
           {
+               id: selectedId,
                title: 'Тестовое задание',
                isCompleted: true
           },
           {
+               id: selectedId,
                title: 'Прекрасный код',
                isCompleted: false
           },
           {
+               id: selectedId,
                title: 'Покрытие тестами',
                isCompleted: true
           }])
      const [sortTodoItems, setSortTodoItems] = useState<TodoItem[]>([...todoItems])
      const [sortPopup, setSortPopup] = useState<string>('all')
 
+
      const todoCompleted = (number: number) => {
           const newTodoItems = [...todoItems]
           setTodoItems(newTodoItems.map((item, id) => (
                id == number ?
                     {
+                         id: item.id,
                          title: item.title,
                          isCompleted: !item.isCompleted
                     } : item
@@ -40,6 +54,7 @@ const TodoMenu: React.FC = () => {
      }
      const addTodo = (title: string) => {
           setTodoItems([...todoItems, {
+               id: selectedId,
                title,
                isCompleted: false
           }])
@@ -71,7 +86,7 @@ const TodoMenu: React.FC = () => {
                     <SortTodo onClick={onClickSort} title={sortPopup} />
                </div>
                {
-                    sortTodoItems.map((item, id) => <TodoItem key={id} id={id} title={item.title} isCompleted={item.isCompleted} onClickCompleted={todoCompleted} onClickRemove={todoRemove} />)
+                    sortTodoItems.map((item, id) => item.id === selectedId ? <TodoItem key={id} id={id} title={item.title} isCompleted={item.isCompleted} onClickCompleted={todoCompleted} onClickRemove={todoRemove} /> : '')
                }
                <div className='todo--clear' onClick={() => setTodoItems([])}>Clear Complited</div>
           </div>
